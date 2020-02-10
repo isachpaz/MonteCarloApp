@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Coin.cs" />
-    <Compile Include="MCCoinResults.cs" />
+    <Compile Include="MCSimulationResults.cs" />
     <Compile Include="MCCoinSimulation.cs" />
     <Compile Include="MCSimulationSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

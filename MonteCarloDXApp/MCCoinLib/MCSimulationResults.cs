@@ -1,11 +1,11 @@
 ﻿namespace MCCoinLib
 {
-    public class MCCoinResults
+    public class MCSimulationResults
     {
         public long Iteration { get; }
         public long NumberOfHits { get; }
 
-        public MCCoinResults(long iteration, long numberOfHits)
+        public MCSimulationResults(long iteration, long numberOfHits)
         {
             Iteration = iteration;
             NumberOfHits = numberOfHits;

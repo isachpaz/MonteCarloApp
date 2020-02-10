@@ -8,9 +8,9 @@ using QuasiRandomGeneratorsLib;
 
 namespace MCCoinLib
 {
-    public delegate void IntermediateResultsHandler(MCCoinResults results);
+    public delegate void IntermediateResultsHandler(MCSimulationResults results);
 
-    public delegate void SimulationFinishedHandler(MCCoinResults results);
+    public delegate void SimulationFinishedHandler(MCSimulationResults results);
 
     public class MCCoinSimulation
     {
@@ -50,23 +50,23 @@ namespace MCCoinLib
                     ++nNumberOfHits;
                     if (nIterations % SimulationSettings.ReportEveryIteration == 0)
                     {
-                        OnResultsUpdated(new MCCoinResults(nIterations, nNumberOfHits));
+                        OnResultsUpdated(new MCSimulationResults(nIterations, nNumberOfHits));
                     }
                 }
             }
 
             var probability = (double) nNumberOfHits / nIterations;
-            OnFinished(new MCCoinResults(nIterations, nNumberOfHits));
+            OnFinished(new MCSimulationResults(nIterations, nNumberOfHits));
             return probability;
         }
 
 
-        protected virtual void OnResultsUpdated(MCCoinResults results)
+        protected virtual void OnResultsUpdated(MCSimulationResults results)
         {
             ResultsUpdated?.Invoke(results);
         }
 
-        protected virtual void OnFinished(MCCoinResults results)
+        protected virtual void OnFinished(MCSimulationResults results)
         {
             Finished?.Invoke(results);
         }

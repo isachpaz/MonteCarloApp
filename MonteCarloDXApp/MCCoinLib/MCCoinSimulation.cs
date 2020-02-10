@@ -32,6 +32,10 @@ namespace MCCoinLib
             if (squareTile == null) throw new ArgumentNullException(nameof(squareTile));
 
             var samplingEngine = Random2DEngineService.GetEngine(method);
+            if (samplingEngine == null)
+            {
+                throw new ArgumentException("Sampling method cannot be found!");
+            }
             var samples = samplingEngine.GetDoubles().Take(this.SimulationSettings.NumberTrials);
             long nNumberOfHits = 0;
             long nIterations = 0;

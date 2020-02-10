@@ -4,5 +4,6 @@
     {
         Halton = 0,
         RandomUniform = 1,
+        RandomUniformWithFixedSeeds = 2,
     }
 }

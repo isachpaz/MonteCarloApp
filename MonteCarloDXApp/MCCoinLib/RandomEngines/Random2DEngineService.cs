@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace MCCoinLib.RandomEngines
 {
@@ -9,7 +10,8 @@ namespace MCCoinLib.RandomEngines
         public Random2DEngineService()
         {
             _dicEngines.Add(SamplingMethod.Halton, HaltonSequence2DEngine.Create());
-            _dicEngines.Add(SamplingMethod.RandomUniform, new RandomSequence2DEngine());
+            _dicEngines.Add(SamplingMethod.RandomUniform, RandomSequence2DEngine.Create(seedX: (int)DateTime.Now.Ticks, seedY:(int)DateTime.Now.Ticks/2));
+            _dicEngines.Add(SamplingMethod.RandomUniformWithFixedSeeds, RandomSequence2DEngine.Create());
         }
 
         public IRandom2DEngine GetEngine(SamplingMethod method)

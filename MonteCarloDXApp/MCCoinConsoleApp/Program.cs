@@ -11,7 +11,7 @@ namespace MCCoinConsoleApp
     {
         static void Main(string[] args)
         {
-            MCCoinSettings settings = MCCoinSettings.Create(
+            MCSimulationSettings settings = MCSimulationSettings.Create(
                 numberTrials: 100000,
                 reportEveryIteration: 100);
             var coin = Coin.CreateWithDiameter(1.0);

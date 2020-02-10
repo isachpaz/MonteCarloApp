@@ -3,14 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonteCarloDXApp.Main", "MonteCarloDXApp\MonteCarloDXApp.Main\MonteCarloDXApp.Main.csproj", "{C14290A6-196E-4B17-A75E-FDAD037D35B5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonteCarloDXApp.Common", "MonteCarloDXApp\MonteCarloDXApp.Common\MonteCarloDXApp.Common.csproj", "{0468D6E6-7778-4E69-A324-6176D79C0696}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonteCarloDXApp.Modules", "MonteCarloDXApp\MonteCarloDXApp.Modules\MonteCarloDXApp.Modules.csproj", "{8AB617C9-9973-444F-A46E-DBF8F34A74B0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonteCarloDXApp.Tests", "MonteCarloDXApp\MonteCarloDXApp.Tests\MonteCarloDXApp.Tests.csproj", "{C685192F-EC99-4B39-B2F3-B20B68FEC275}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCCoinLib", "MCCoinLib\MCCoinLib.csproj", "{0A97F667-D222-4B24-91C9-4D51E6C42369}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCCoinLib.Tests", "MCCoinLib.Tests\MCCoinLib.Tests.csproj", "{CBF5D6EB-1B03-4318-9465-2E73E8C4C06F}"
@@ -23,22 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C14290A6-196E-4B17-A75E-FDAD037D35B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C14290A6-196E-4B17-A75E-FDAD037D35B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C14290A6-196E-4B17-A75E-FDAD037D35B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C14290A6-196E-4B17-A75E-FDAD037D35B5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0468D6E6-7778-4E69-A324-6176D79C0696}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0468D6E6-7778-4E69-A324-6176D79C0696}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0468D6E6-7778-4E69-A324-6176D79C0696}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0468D6E6-7778-4E69-A324-6176D79C0696}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8AB617C9-9973-444F-A46E-DBF8F34A74B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8AB617C9-9973-444F-A46E-DBF8F34A74B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8AB617C9-9973-444F-A46E-DBF8F34A74B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8AB617C9-9973-444F-A46E-DBF8F34A74B0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C685192F-EC99-4B39-B2F3-B20B68FEC275}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C685192F-EC99-4B39-B2F3-B20B68FEC275}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C685192F-EC99-4B39-B2F3-B20B68FEC275}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C685192F-EC99-4B39-B2F3-B20B68FEC275}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0A97F667-D222-4B24-91C9-4D51E6C42369}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0A97F667-D222-4B24-91C9-4D51E6C42369}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A97F667-D222-4B24-91C9-4D51E6C42369}.Release|Any CPU.ActiveCfg = Release|Any CPU

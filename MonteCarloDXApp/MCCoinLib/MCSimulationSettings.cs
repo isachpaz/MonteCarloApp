@@ -2,23 +2,23 @@
 
 namespace MCCoinLib
 {
-    public class MCCoinSettings
+    public class MCSimulationSettings
     {
         public int NumberTrials { get; }
         public int ReportEveryIteration { get; }
 
-        protected MCCoinSettings(int numberTrials, int reportEveryIteration)
+        protected MCSimulationSettings(int numberTrials, int reportEveryIteration)
         {
             NumberTrials = numberTrials;
             ReportEveryIteration = reportEveryIteration;
         }
 
-        public static MCCoinSettings Create(int numberTrials, int reportEveryIteration = 1)
+        public static MCSimulationSettings Create(int numberTrials, int reportEveryIteration = 1)
         {
             if (numberTrials <= 0) throw new ArgumentOutOfRangeException(nameof(numberTrials));
             if (reportEveryIteration <= 0) throw new ArgumentOutOfRangeException(nameof(reportEveryIteration));
 
-            return new MCCoinSettings(
+            return new MCSimulationSettings(
                 numberTrials,
                 reportEveryIteration
             );

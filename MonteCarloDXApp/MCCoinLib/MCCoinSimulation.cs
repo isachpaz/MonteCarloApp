@@ -16,17 +16,17 @@ namespace MCCoinLib
     {
         public event IntermediateResultsHandler ResultsUpdated;
         public event SimulationFinishedHandler Finished;
-        public MCCoinSettings McCoinSettings { get; }
+        public MCSimulationSettings SimulationSettings { get; }
         public IRandom2DEngine Random2DEngine { get; }
 
         /// <summary>
         /// ctor
         /// </summary>
-        /// <param name="mcCoinSettings">MCCoinSettings parameter</param>
+        /// <param name="mcSimulationSettings">MCCoinSettings parameter</param>
         /// <param name="random2DEngine">Default random engine is HaltonSequence2DEngine</param>
-        public MCCoinSimulation(MCCoinSettings mcCoinSettings, IRandom2DEngine random2DEngine = null)
+        public MCCoinSimulation(MCSimulationSettings mcSimulationSettings, IRandom2DEngine random2DEngine = null)
         {
-            McCoinSettings = mcCoinSettings ?? throw new ArgumentNullException(nameof(mcCoinSettings));
+            SimulationSettings = mcSimulationSettings ?? throw new ArgumentNullException(nameof(mcSimulationSettings));
             Random2DEngine = random2DEngine ?? HaltonSequence2DEngine.Create();
         }
 
@@ -35,7 +35,7 @@ namespace MCCoinLib
             if (coin == null) throw new ArgumentNullException(nameof(coin));
             if (squareTile == null) throw new ArgumentNullException(nameof(squareTile));
 
-            var samples = Random2DEngine.GetDoubles().Take(this.McCoinSettings.NumberTrials);
+            var samples = Random2DEngine.GetDoubles().Take(this.SimulationSettings.NumberTrials);
             long nNumberOfHits = 0;
             long nIterations = 0;
 
@@ -48,7 +48,7 @@ namespace MCCoinLib
                 if (squareTile.CollisionCheckWithCoin(dX, dY, coin.Radius))
                 {
                     ++nNumberOfHits;
-                    if (nIterations % McCoinSettings.ReportEveryIteration == 0)
+                    if (nIterations % SimulationSettings.ReportEveryIteration == 0)
                     {
                         OnResultsUpdated(new MCCoinResults(nIterations, nNumberOfHits));
                     }

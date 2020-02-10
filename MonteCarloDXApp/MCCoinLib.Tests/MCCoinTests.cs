@@ -14,7 +14,7 @@ namespace MCCoinLib.Tests
         [Test]
         public void MCCoinSettings_Creation_Test()
         {
-            MCCoinSettings settings = MCCoinSettings.Create(numberTrials: 1000);
+            MCSimulationSettings settings = MCSimulationSettings.Create(numberTrials: 1000);
             Assert.AreEqual(1000, settings.NumberTrials);
         }
 
@@ -33,13 +33,13 @@ namespace MCCoinLib.Tests
         [Test]
         public void MCCoinSettings_Creation_With_Negative_Trials_Exception_Test()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => { MCCoinSettings.Create(0); });
+            Assert.Throws<ArgumentOutOfRangeException>(() => { MCSimulationSettings.Create(0); });
         }
 
         [Test]
         public void MCCoinSimulation_Halton_Run_Test()
         {
-            MCCoinSettings settings = MCCoinSettings.Create(
+            MCSimulationSettings settings = MCSimulationSettings.Create(
                 numberTrials: 1000);
             var coin = Coin.CreateWithDiameter(1.0);
             var squareTile = SquareTile.Create(2.0);
@@ -56,7 +56,7 @@ namespace MCCoinLib.Tests
         [Test]
         public void MCCoinSimulation_UniformRandom_Run_Test()
         {
-            MCCoinSettings settings = MCCoinSettings.Create(
+            MCSimulationSettings settings = MCSimulationSettings.Create(
                 numberTrials: 100000);
             var coin = Coin.CreateWithDiameter(1.0);
             var squareTile = SquareTile.Create(2.0);

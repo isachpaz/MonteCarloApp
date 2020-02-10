@@ -38,9 +38,10 @@ namespace MCCoinLib
             foreach (Tuple<double, double> xySample in samples)
             {
                 ++nIterations;
-                var dX = xySample.Item1;
-                var dY = xySample.Item2;
-
+                var cordinatesOnSquareTile = squareTile.TransformCoordinates(xySample);
+                var dX = cordinatesOnSquareTile.Item1;
+                var dY = cordinatesOnSquareTile.Item2;
+                
                 if (squareTile.CollisionCheckWithCoin(dX, dY, coin.Radius))
                 {
                     ++nNumberOfHits;

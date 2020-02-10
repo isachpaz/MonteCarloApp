@@ -13,25 +13,26 @@ namespace MCCoinLib
         public event IntermediateResultsHandler ResultsUpdated;
         public event SimulationFinishedHandler Finished;
         public MCSimulationSettings SimulationSettings { get; }
-        public IRandom2DEngine Random2DEngine { get; }
+        internal Random2DEngineService Random2DEngineService { get; }
 
         /// <summary>
         /// ctor
         /// </summary>
         /// <param name="mcSimulationSettings">MCCoinSettings parameter</param>
         /// <param name="random2DEngine">Default random engine is HaltonSequence2DEngine</param>
-        public MCCoinSimulation(MCSimulationSettings mcSimulationSettings, IRandom2DEngine random2DEngine = null)
+        public MCCoinSimulation(MCSimulationSettings mcSimulationSettings, Random2DEngineService random2DEngineService)
         {
             SimulationSettings = mcSimulationSettings ?? throw new ArgumentNullException(nameof(mcSimulationSettings));
-            Random2DEngine = random2DEngine ?? HaltonSequence2DEngine.Create();
+            Random2DEngineService = random2DEngineService ?? throw new ArgumentNullException(nameof(random2DEngineService));
         }
 
-        public double Run(Coin coin, SquareTile squareTile)
+        public double Run(Coin coin, SquareTile squareTile, SamplingMethod method)
         {
             if (coin == null) throw new ArgumentNullException(nameof(coin));
             if (squareTile == null) throw new ArgumentNullException(nameof(squareTile));
 
-            var samples = Random2DEngine.GetDoubles().Take(this.SimulationSettings.NumberTrials);
+            var samplingEngine = Random2DEngineService.GetEngine(method);
+            var samples = samplingEngine.GetDoubles().Take(this.SimulationSettings.NumberTrials);
             long nNumberOfHits = 0;
             long nIterations = 0;
 
@@ -47,13 +48,14 @@ namespace MCCoinLib
                     ++nNumberOfHits;
                     if (nIterations % SimulationSettings.ReportEveryIteration == 0)
                     {
-                        OnResultsUpdated(new MCSimulationResults(nIterations, nNumberOfHits));
+                        OnResultsUpdated(new MCSimulationResults(nIterations, 
+                            nNumberOfHits, coin, squareTile, method));
                     }
                 }
             }
 
             var probability = (double) nNumberOfHits / nIterations;
-            OnFinished(new MCSimulationResults(nIterations, nNumberOfHits));
+            OnFinished(new MCSimulationResults(nIterations, nNumberOfHits, coin, squareTile, method));
             return probability;
         }
 

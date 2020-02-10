@@ -39,16 +39,17 @@ namespace MCCoinLib.Tests
         [Test]
         public void MCCoinSimulation_Halton_Run_Test()
         {
-            MCSimulationSettings settings = MCSimulationSettings.Create(
-                numberTrials: 1000);
+            var settings = MCSimulationSettings.Create(numberTrials: 1000);
+            var randomEngineService = new Random2DEngineService();
+
             var coin = Coin.CreateWithDiameter(1.0);
             var squareTile = SquareTile.Create(2.0);
 
-            MCCoinSimulation simulation = new MCCoinSimulation(settings);
+            MCCoinSimulation simulation = new MCCoinSimulation(settings, randomEngineService);
             simulation.ResultsUpdated += results => { };
             //simulation.ResultsUpdated += (res) => { Console.WriteLine("New results..."); };
 
-            var probability = simulation.Run(coin:  coin, squareTile: squareTile);
+            var probability = simulation.Run(coin:  coin, squareTile: squareTile, method: SamplingMethod.Halton);
 
             Assert.AreEqual(0.75, Math.Round(probability,2));
         }
@@ -56,13 +57,13 @@ namespace MCCoinLib.Tests
         [Test]
         public void MCCoinSimulation_UniformRandom_Run_Test()
         {
-            MCSimulationSettings settings = MCSimulationSettings.Create(
-                numberTrials: 100000);
+            var settings = MCSimulationSettings.Create(numberTrials: 100000);
+            var randomEngineService = new Random2DEngineService();
             var coin = Coin.CreateWithDiameter(1.0);
             var squareTile = SquareTile.Create(2.0);
 
-            var simulation = new MCCoinSimulation(settings, new RandomSequence2DEngine(100,1023));
-            var probability = simulation.Run(coin:  coin, squareTile: squareTile);
+            var simulation = new MCCoinSimulation(settings, randomEngineService);
+            var probability = simulation.Run(coin:  coin, squareTile: squareTile, method: SamplingMethod.RandomUniform);
 
             Assert.AreEqual(0.75, Math.Round(probability,2));
         }

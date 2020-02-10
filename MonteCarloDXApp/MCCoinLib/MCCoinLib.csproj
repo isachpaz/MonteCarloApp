@@ -48,7 +48,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomEngines\HaltonSequence2DEngine.cs" />
     <Compile Include="RandomEngines\IRandom2DEngine.cs" />
+    <Compile Include="RandomEngines\Random2DEngineService.cs" />
     <Compile Include="RandomEngines\RandomSequence2DEngine.cs" />
+    <Compile Include="RandomEngines\SamplingMethod.cs" />
     <Compile Include="SquareTile.cs" />
     <Compile Include="SquareTileHelper.cs" />
   </ItemGroup>
@@ -56,6 +58,9 @@
     <PackageReference Include="QuasiRandomGeneratorsLib">
       <Version>1.0.4</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MCLibClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

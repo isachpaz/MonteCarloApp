@@ -16,7 +16,7 @@ namespace MCCoinLib.RandomEngines
 
         public IRandom2DEngine GetEngine(SamplingMethod method)
         {
-            return _dicEngines[method];
+            return _dicEngines.TryGetValue(method, out IRandom2DEngine engine) ? _dicEngines[method] : null;
         }
     }
 }

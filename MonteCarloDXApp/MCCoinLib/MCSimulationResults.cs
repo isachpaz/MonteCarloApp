@@ -30,7 +30,7 @@ namespace MCCoinLib
         public override string ToString()
         {
             return $"Input data: \n" +
-                   $"(1) coin with diameter = {Coin.Diameter}.\n" +
+                   $"(1) coin with diameter = {Coin.Diameter}\n" +
                    $"(2) square tile of size = {SquareTile.XSize}x{SquareTile.YSize}\n" +
                    $"(3) sampling method: {SamplingMethod.ToString()}\n" +
                    $"The coin has probability of {Probability} to land on the square edges.";

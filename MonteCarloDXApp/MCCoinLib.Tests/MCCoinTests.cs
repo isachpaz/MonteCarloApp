@@ -18,22 +18,35 @@ namespace MCCoinLib.Tests
             Assert.AreEqual(1000, settings.NumberTrials);
         }
 
-        [Test]
-        public void Coin_Creation_With_Negative_Diameter_Exception_Test()
+        [TestCase(0)]
+        [TestCase(-1)]
+        [TestCase(-2.34)]
+        [TestCase(-200.999999)]
+        [TestCase(-10)]
+        public void Coin_Creation_With_Negative_Diameter_Exception_Test(double diam)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => { Coin.CreateWithDiameter(-5); });
+            Assert.Throws<ArgumentOutOfRangeException>(() => { Coin.CreateWithDiameter(diam); });
         }
 
-        [Test]
-        public void SquareTile_Creation_With_Negative_SquareLength_Exception_Test()
+
+        [TestCase(0)]
+        [TestCase(-1)]
+        [TestCase(-2.34)]
+        [TestCase(-200.999999)]
+        [TestCase(-10)]
+        public void SquareTile_Creation_With_Negative_SquareLength_Exception_Test(double len)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => { SquareTile.Create(-8); });
+            Assert.Throws<ArgumentOutOfRangeException>(() => { SquareTile.Create(len); });
         }
 
-        [Test]
-        public void MCCoinSettings_Creation_With_Negative_Trials_Exception_Test()
+
+        [TestCase(0)]
+        [TestCase(-1)]
+        [TestCase(-10)]
+        [TestCase(-10000)]
+        public void MCCoinSettings_Creation_With_Negative_Trials_Exception_Test(int nTrials)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => { MCSimulationSettings.Create(0); });
+            Assert.Throws<ArgumentOutOfRangeException>(() => { MCSimulationSettings.Create(nTrials); });
         }
 
         [Test]
@@ -46,12 +59,12 @@ namespace MCCoinLib.Tests
             var squareTile = SquareTile.Create(2.0);
 
             MCCoinSimulation simulation = new MCCoinSimulation(settings, randomEngineService);
-            simulation.ResultsUpdated += results => { };
-            //simulation.ResultsUpdated += (res) => { Console.WriteLine("New results..."); };
+            simulation.Finished += results =>
+            {
+                Assert.AreEqual(0.75, Math.Round(results.Probability, 2));
+            };
 
-            var probability = simulation.Run(coin:  coin, squareTile: squareTile, method: SamplingMethod.Halton);
-
-            Assert.AreEqual(0.75, Math.Round(probability,2));
+            simulation.Run(coin:  coin, squareTile: squareTile, method: SamplingMethod.Halton);
         }
 
         [Test]
@@ -63,9 +76,8 @@ namespace MCCoinLib.Tests
             var squareTile = SquareTile.Create(2.0);
 
             var simulation = new MCCoinSimulation(settings, randomEngineService);
-            var probability = simulation.Run(coin:  coin, squareTile: squareTile, method: SamplingMethod.RandomUniform);
-
-            Assert.AreEqual(0.75, Math.Round(probability,2));
+            simulation.Finished += results => { Assert.AreEqual(0.75, Math.Round(results.Probability, 2)); };
+            simulation.Run(coin:  coin, squareTile: squareTile, method: SamplingMethod.RandomUniform);
         }
     }
 }

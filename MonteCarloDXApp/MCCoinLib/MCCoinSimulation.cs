@@ -23,10 +23,11 @@ namespace MCCoinLib
         public MCCoinSimulation(MCSimulationSettings mcSimulationSettings, Random2DEngineService random2DEngineService)
         {
             SimulationSettings = mcSimulationSettings ?? throw new ArgumentNullException(nameof(mcSimulationSettings));
-            Random2DEngineService = random2DEngineService ?? throw new ArgumentNullException(nameof(random2DEngineService));
+            Random2DEngineService =
+                random2DEngineService ?? throw new ArgumentNullException(nameof(random2DEngineService));
         }
 
-        public double Run(Coin coin, SquareTile squareTile, SamplingMethod method)
+        public void Run(Coin coin, SquareTile squareTile, SamplingMethod method)
         {
             if (coin == null) throw new ArgumentNullException(nameof(coin));
             if (squareTile == null) throw new ArgumentNullException(nameof(squareTile));
@@ -36,6 +37,7 @@ namespace MCCoinLib
             {
                 throw new ArgumentException("Sampling method cannot be found!");
             }
+
             var samples = samplingEngine.GetDoubles().Take(this.SimulationSettings.NumberTrials);
             long nNumberOfHits = 0;
             long nIterations = 0;
@@ -43,16 +45,16 @@ namespace MCCoinLib
             foreach (Tuple<double, double> xySample in samples)
             {
                 ++nIterations;
-                var cordinatesOnSquareTile = squareTile.TransformCoordinates(xySample);
-                var dX = cordinatesOnSquareTile.Item1;
-                var dY = cordinatesOnSquareTile.Item2;
-                
+                var coordinateOnSquareTile = squareTile.TransformCoordinates(xySample);
+                var dX = coordinateOnSquareTile.Item1;
+                var dY = coordinateOnSquareTile.Item2;
+
                 if (squareTile.CollisionCheckWithCoin(dX, dY, coin.Radius))
                 {
                     ++nNumberOfHits;
                     if (nIterations % SimulationSettings.ReportEveryIteration == 0)
                     {
-                        OnResultsUpdated(new MCSimulationResults(nIterations, 
+                        OnResultsUpdated(new MCSimulationResults(nIterations,
                             nNumberOfHits, coin, squareTile, method));
                     }
                 }
@@ -60,7 +62,6 @@ namespace MCCoinLib
 
             var probability = (double) nNumberOfHits / nIterations;
             OnFinished(new MCSimulationResults(nIterations, nNumberOfHits, coin, squareTile, method));
-            return probability;
         }
 
 
